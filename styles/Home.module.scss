@@ -1,0 +1,31 @@
+.container {
+  padding: 0 2rem;
+}
+
+.news {
+  display: flex;
+}
+
+.time {
+  padding: 0 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 180px;
+  background-color: #2e346a;
+  border-radius: 20px;
+
+  .block {
+    border-radius: 40px 0 40px 0;
+    background-color: #92ecc1;
+    font-weight: 700;
+    font-size: 25px;
+    line-height: 34px;
+    letter-spacing: 1.08em;
+    padding-left: 20px;
+    color: #05051b;
+    height: 80px;
+    display: flex;
+    align-items: center;
+  }
+}

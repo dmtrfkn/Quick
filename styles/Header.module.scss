@@ -1,0 +1,115 @@
+.header {
+  width: 100%;
+  background-color: #2e346a;
+  padding: 20px 50px;
+  height: 120px;
+
+  .wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo,
+  .auth {
+    transition: 0.3s;
+    transform: scale(1);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    color: #05051b;
+    font-weight: 900;
+    font-size: 25px;
+    line-height: 34px;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 22px;
+    background-color: #4e989d;
+
+    &:hover {
+      transform: scale(0.9);
+    }
+
+    &:active {
+      border: none;
+      background-color: #40e5be;
+      transform: scale(1);
+    }
+  }
+
+  .links {
+    color: #40e5be;
+    display: flex;
+    justify-content: space-between;
+    width: 820px;
+    font-weight: 900;
+    font-size: 25px;
+    line-height: 34px;
+
+    .link {
+      transform: scale(0.9);
+      transition: 0.3s;
+      position: relative;
+
+      &::after {
+        border-radius: 10px;
+        transition: 0.3s;
+        transform: translateX(-20px);
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        opacity: 0;
+        content: "";
+        width: 2px;
+        height: 50px;
+        background-color: #40e5be;
+      }
+      &::before {
+        border-radius: 10px;
+        transition: 0.3s;
+        transform: translateX(20px);
+        position: absolute;
+        top: -10px;
+        right: -20px;
+        opacity: 0;
+        content: "";
+        width: 2px;
+        height: 50px;
+        background-color: #40e5be;
+      }
+    }
+
+    .link:hover {
+      transform: scale(1);
+
+      &::after {
+        transform: translateX(0px);
+        opacity: 1;
+        left: -15px;
+      }
+      &::before {
+        transform: translateX(-20px);
+        opacity: 1;
+        right: -35px;
+      }
+    }
+  }
+
+  .logo {
+    width: 164px;
+    height: 80px;
+  }
+
+  .auth {
+    display: flex;
+    justify-content: center;
+    width: 156px;
+    height: 60px;
+    gap: 5px;
+    padding: 10px 20px;
+  }
+
+  .hov:hover {
+    background-color: #40e5be;
+  }
+}

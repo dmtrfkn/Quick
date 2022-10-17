@@ -1,0 +1,38 @@
+.block {
+  width: 400px;
+  height: 420px;
+  background-color: transparent;
+  border: 2px solid #4e989d;
+
+  .trend {
+    background-color: #b831c3;
+  }
+
+  .track {
+    width: 350px;
+    height: 60px;
+    background-color: #000;
+
+    .bottom svg path {
+      fill: #fff;
+
+      &:hover {
+        fill: #40e5be;
+      }
+    }
+  }
+
+  .recommendation {
+    background-color: #5128c7;
+  }
+
+  .top {
+    background-color: #836fff;
+  }
+
+  .h1 {
+    width: 256px;
+    height: 60px;
+    color: #cbf1f3;
+  }
+}

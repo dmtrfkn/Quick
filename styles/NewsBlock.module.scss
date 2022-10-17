@@ -1,0 +1,30 @@
+.block {
+  background-color: transparent;
+  border: 2px solid #4e989d;
+  padding: 20px 30px;
+  border-radius: 8px;
+  width: 608px;
+  height: 234px;
+  margin: 50px;
+
+  .h1 {
+    font-weight: 700;
+    font-size: 25px;
+    line-height: 34px;
+    color: #40e5be;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .text {
+    background-color: #009471;
+    padding: 16px;
+    border-radius: 12px;
+    height: 150px;
+    color: #cbf1f3;
+    font-weight: 900;
+    font-size: 20px;
+    line-height: 27px;
+  }
+}

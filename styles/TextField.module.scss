@@ -1,0 +1,47 @@
+.input {
+  width: 400px;
+  height: 40px;
+  border-radius: 12px;
+  color: #40e5be;
+  border: 1px solid #4e989d;
+  background-color: transparent;
+  outline: none;
+  padding-left: 10px;
+  margin-bottom: 30px;
+
+  &::placeholder {
+    color: #bdbdbd;
+  }
+
+  &:focus {
+    border-color: #40e5be;
+  }
+
+  &:hover {
+    border-color: #40e5be;
+  }
+}
+
+.pass {
+  position: relative;
+}
+
+.icon {
+  cursor: pointer;
+  position: absolute;
+  top: 8px;
+  right: 14px;
+}
+
+.icone {
+  cursor: pointer;
+  position: absolute;
+  top: 38px;
+  right: 14px;
+}
+
+.error {
+  color: #4e989d;
+  margin-bottom: 5px;
+  margin-left: 5px;
+}

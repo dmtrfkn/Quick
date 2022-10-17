@@ -1,0 +1,44 @@
+.popup {
+  background-color: #202020;
+  width: 500px;
+  height: auto;
+  display: flex;
+  border-radius: 12px;
+  padding: 35px 50px;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  .buttons {
+    display: flex;
+    gap: 50px;
+  }
+
+  .button {
+    cursor: pointer;
+
+    outline: none;
+    width: 160px;
+    height: 40px;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 30px;
+    color: #4e989d;
+    border: none;
+    background-color: transparent;
+    margin-bottom: 35px;
+
+    &:active {
+      color: #40e5be;
+    }
+    &:hover {
+      color: #40e5be;
+    }
+  }
+
+  .active {
+    color: #40e5be;
+    border-bottom: 1px solid #40e5be;
+  }
+}
