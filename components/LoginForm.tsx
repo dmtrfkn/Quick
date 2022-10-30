@@ -29,7 +29,7 @@ const LoginForm: FC<LoginFormProps> = ({ setOpen }) => {
   const dispatch = useAppDispatch();
 
   const onSubmit = (data: {}) => {
-    axios.post("http://localhost:5000/users/login", data).then((res) => {
+    axios.post("http://localhost:4000/users/login", data).then((res) => {
       if (res.data) {
         dispatch(login(res.data.user));
         window.localStorage.setItem("token", res.data.token);

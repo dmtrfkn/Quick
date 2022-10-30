@@ -3,19 +3,15 @@ import "../styles/globals.scss";
 import Links from "../components/Link";
 import Head from "next/head";
 import { store } from "../store";
+import Layout from "../components/Layout";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <>
-      <Head>
-        <Links />
-        <title>Quick</title>
-      </Head>
-
-      <Provider store={store}>
-        <Component {...pageProps} />;
-      </Provider>
-    </>
+    <Provider store={store}>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </Provider>
   );
 }
 

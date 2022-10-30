@@ -5,29 +5,17 @@ import { useEffect } from "react";
 import Layout from "../components/Layout";
 import Links from "../components/Link";
 import NewsBlock from "../components/NewsBlock";
+import Track from "../components/TrackItem";
+// import TrackBlock from "../components/TrackBlock";
 import { useAppDispatch } from "../store/hooks/redux";
 import { login } from "../store/slices/UserSlice";
 import styles from "../styles/Home.module.scss";
 
 export default function Home() {
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    axios
-      .get("http://localhost:5000/users/auth", {
-        headers: {
-          authorization: "Bearer" + window.localStorage.getItem("token"),
-        },
-      })
-      .then((res) => {
-        if (res.data) {
-          dispatch(login(res.data.user));
-        }
-      });
-  }, []);
   return (
-    <Layout>
+    <>
       <Links />
+      <div className={styles.block}>
       <div className="container">
         <div className={styles.news}>
           <NewsBlock
@@ -94,6 +82,11 @@ export default function Home() {
           </svg>
         </div>
       </div>
-    </Layout>
-  );
+      <div>
+        {/* <TrackBlock heading='Чарты'></TrackBlock> */}
+      </div>
+      </div>
+
+    </>
+  )
 }

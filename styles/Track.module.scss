@@ -1,0 +1,63 @@
+.block {
+    background-color: #000;
+    border-radius: 8px;
+    width: 1330px  ;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    align-items: center;
+
+    .image {
+        position: relative;
+        border-radius: 8px;
+    }
+
+    .i {
+        position: relative;
+        top: 5px;
+        left: 0;
+
+    .pause {
+            position: absolute;
+            left: 17px;
+            top: 17px;
+        }
+    }
+
+    .name {
+        display: flex;
+        gap: 10px;
+    }
+
+
+    .text {
+        font-weight: 700;
+        font-size: 10px;
+        line-height: 14px;
+        text-align: center;
+
+color: rgba(255, 255, 255, 0.5);
+    }
+
+    .hover {
+        margin-top: 5px;
+        svg path {
+            fill: white
+        }
+
+        &:hover {
+            svg path {
+                fill: #40E5BE
+            }
+        }
+    }
+}
+
+.hovers {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin-right: 10px;
+    align-items: center;
+}

@@ -25,7 +25,7 @@ const AuthForm: FC<AuthFormProps> = ({ setOpen }) => {
   } = useForm<AuthData>();
 
   const onSubmit = (data: {}) => {
-    axios.post("http://localhost:5000/users", data);
+    axios.post("http://localhost:4000/users", data);
     setOpen();
   };
 

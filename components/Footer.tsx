@@ -28,7 +28,7 @@ const Footer = () => {
             <Link href="/chat">
               <a href="/chat">Чат</a>
             </Link>
-            <Link href="/albums">
+            <Link href="/albums"> 
               <a href="/albums">Альбомы</a>
             </Link>
           </div>

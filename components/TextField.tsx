@@ -5,10 +5,10 @@ import styles from "../styles/TextField.module.scss";
 
 interface TextFiledProps {
   value?: string;
-  onChange?: (value: string) => void;
-  placeholder: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  placeholder?: string;
   register?: UseFormRegisterReturn<"email" | "name" | "nick">;
-  type?: "text" | "email";
+  type?: "text" | "email" | 'range';
   errorMessage?: string;
 }
 
@@ -29,7 +29,7 @@ const TextField: FC<TextFiledProps> = ({
           type={type}
           autoComplete="off"
           className={styles.input}
-          onChange={(e) => onChange(e.target.value)}
+          onChange={onChange}
         />
       ) : (
         <>

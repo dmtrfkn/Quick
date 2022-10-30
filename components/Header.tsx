@@ -19,6 +19,7 @@ const Header = () => {
   const dispatch = useAppDispatch();
 
   const logoutHandler = () => {
+    window.localStorage.removeItem('token')
     dispatch(logout());
   };
 
@@ -44,8 +45,11 @@ const Header = () => {
             <Link href="/">
               <a className={styles.link}>ГЛАВНАЯ</a>
             </Link>
+            <Link href="/tracks">
+              <a className={styles.link}>МУЗЫКА</a>
+            </Link>
             <Link href="/">
-              <a className={styles.link}> РЕКОМЕНДАЦИИ</a>
+              <a className={styles.link}>МОИ ТРЕКИ</a>
             </Link>
             <Link href="/">
               <a className={styles.link}>ЧАТ</a>

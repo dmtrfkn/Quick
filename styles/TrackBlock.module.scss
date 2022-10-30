@@ -3,6 +3,12 @@
   height: 420px;
   background-color: transparent;
   border: 2px solid #4e989d;
+  border-radius: 22px;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
 
   .trend {
     background-color: #b831c3;
@@ -31,8 +37,17 @@
   }
 
   .h1 {
+    margin: 0px;
+    text-align: center;
+    vertical-align: middle;
+    background-color: #B831C3;
+    border-radius: 8px;
     width: 256px;
     height: 60px;
     color: #cbf1f3;
+    font-weight: 700;
+      font-size: 25px;
+      line-height: 34px;
+      padding-top: 12px;
   }
 }
