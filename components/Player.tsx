@@ -40,20 +40,28 @@ const Player = () => {
       audio = new Audio();
     } else {
       audio.currentTime = currentTime;
+      audio.src = `http://localhost:4000/${active.audio}`;
+
       setAudio();
-      if (pause) {
+      playTrack();
+      audio.play();
+    }
+    const isAdd = () => !!user?.tracks.find((i) => i._id === active._id);
+    setAdd(isAdd());
+  }, [active]);
+
+  useEffect(() => {
+    if (audio.src) {
+      if (!pause) {
         audio.play();
       } else {
         audio.pause();
       }
     }
-    const isAdd = () => !!user?.tracks.find((i) => i._id === active._id);
-    setAdd(isAdd());
-  }, [active, pause]);
+  }, [pause]);
 
   const setAudio = () => {
     if (active) {
-      audio.src = `http://localhost:4000/${active.audio}`;
       audio.volume = volume / 100;
       audio.onloadedmetadata = () => {
         setDuration(Math.ceil(audio.duration));
