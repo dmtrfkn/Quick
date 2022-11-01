@@ -1,43 +1,66 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react';
 import TextField from './TextField';
 
-import styles from '../styles/TrackProgress.module.scss'
+import styles from '../styles/TrackProgress.module.scss';
 
 interface TrackProgressProps {
-  left?: number ;
+  left?: number;
   right?: number;
   min?: number;
   max?: number;
   tyre?: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  width: number
+  width: number;
 }
 
-const TrackProgress: FC<TrackProgressProps> = ({ left, right, onChange, width, tyre, min, max }) => {
-  var timeFormat = (function (){
-    function num(val){
-        val = Math.floor(val);
-        return val < 10 ? '0' + val : val;
+const TrackProgress: FC<TrackProgressProps> = ({
+  left,
+  right,
+  onChange,
+  width,
+  tyre,
+  min,
+  max,
+}) => {
+  var timeFormat = (function () {
+    function num(val) {
+      val = Math.floor(val);
+      return val < 10 ? '0' + val : val;
     }
-
-    return function (ms: number){
-        let sec = ms / 1000
-          , minutes = sec / 60 % 60
-          , seconds = sec % 60
-        ;
-
-        return num(minutes) + ":" + num(seconds);
+    return function (ms: number) {
+      let sec = ms / 1000,
+        minutes = (sec / 60) % 60,
+        seconds = sec % 60;
+      return num(minutes) + ':' + num(seconds);
     };
-})();
+  })();
 
-let leftN = timeFormat(left*1000);
-let rightN = timeFormat(right*1000);
+  let leftN = timeFormat(left * 1000);
+  let rightN = timeFormat(right * 1000);
+
+  // const [value, setValue] = useState(left ? left : min);
+
+  // const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setValue(Number(e.target.value));
+  //   onChange(e);
+  // };
+
   return (
     <div className={styles.block}>
-      <input type='range' style={{ width: `${width}px` }} step='1' min={0} max={right} value={left ? left : min} onChange={onChange} />
-      <div className={styles.numbers}>{left ? leftN : min} {tyre} {right ? rightN : max}</div>
+      <input
+        type="range"
+        style={{ width: `${width}px` }}
+        step="1"
+        min={0}
+        max={right}
+        value={left ? left : min}
+        onChange={onChange}
+      />
+      <div className={styles.numbers}>
+        {left ? leftN : min} {tyre} {right ? rightN : max}
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default TrackProgress
+export default TrackProgress;

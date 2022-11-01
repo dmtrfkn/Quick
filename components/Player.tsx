@@ -12,28 +12,13 @@ import TrackProgress from './TrackProgress';
 let audio;
 
 const Player = () => {
-  const { pause, duration, currentTime, active, volume } = useAppSelector((state) => state.player);
-  const { pauseTrack, playTrack, setCurrentTime, setDuration, setVolume } = useActions();
+  const { pause, duration, currentTime, active, volume, add } = useAppSelector(
+    (state) => state.player,
+  );
+  const { pauseTrack, playTrack, setCurrentTime, setDuration, setVolume, addTrack, removeTrack } =
+    useActions();
   const { isAuth, user } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
-  const [add, setAdd] = useState(false);
-
-  const addHandler = () => {
-    if (isAuth) {
-      setAdd((prev) => !prev);
-      if (!add) {
-        axios
-          .patch('http://localhost:4000/users/addTrack/' + user._id, { trackId: active._id })
-          .then((res) => dispatch(change(res.data)));
-      } else {
-        axios
-          .patch('http://localhost:4000/users/removeTrack/' + user._id, { trackId: active._id })
-          .then((res) => dispatch(change(res.data)));
-      }
-    } else {
-      alert('Нужно авторизоваться');
-    }
-  };
 
   useEffect(() => {
     if (!audio) {
@@ -41,13 +26,12 @@ const Player = () => {
     } else {
       audio.currentTime = currentTime;
       audio.src = `http://localhost:4000/${active.audio}`;
-
       setAudio();
-      playTrack();
-      audio.play();
+      if (user) {
+        audio.play();
+        playTrack();
+      }
     }
-    const isAdd = () => !!user?.tracks.find((i) => i._id === active._id);
-    setAdd(isAdd());
   }, [active]);
 
   useEffect(() => {
@@ -71,6 +55,8 @@ const Player = () => {
         setCurrentTime(Math.ceil(audio.currentTime));
         return currentTime;
       };
+      // playTrack();
+      // audio.play();
     }
   };
 
@@ -98,6 +84,28 @@ const Player = () => {
       pauseTrack();
     }
   };
+
+  const addHandler = () => {
+    if (isAuth) {
+      if (!add) {
+        axios
+          .patch('http://localhost:4000/users/addTrack/' + user._id, { trackId: active._id })
+          .then((res) => dispatch(change(res.data)));
+        addTrack();
+      } else {
+        axios
+          .patch('http://localhost:4000/users/removeTrack/' + user._id, { trackId: active._id })
+          .then((res) => dispatch(change(res.data)));
+        removeTrack();
+      }
+    } else {
+      alert('Нужно авторизоваться');
+    }
+  };
+
+  if (!active) {
+    return null;
+  }
 
   return (
     <div className={styles.block}>
