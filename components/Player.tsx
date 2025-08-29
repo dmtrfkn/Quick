@@ -1,31 +1,41 @@
 import axios from 'axios';
 import Image from 'next/image';
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, useContext, useEffect, useState } from 'react';
+import { WebSocketContext } from '../contexts/WebSocketContext';
 import { useAppDispatch, useAppSelector } from '../store/hooks/redux';
 import { useActions } from '../store/hooks/useActions';
 import { change } from '../store/slices/UserSlice';
 
 import styles from '../styles/Player.module.scss';
 import { Track } from '../types/Track';
+import Modal from './Modal';
 import TrackProgress from './TrackProgress';
 
 let audio;
 
 const Player = () => {
-  const { pause, duration, currentTime, active, volume, add } = useAppSelector(
+  const { playList, pause, duration, currentTime, active, volume, add } = useAppSelector(
     (state) => state.player,
   );
-  const { pauseTrack, playTrack, setCurrentTime, setDuration, setVolume, addTrack, removeTrack } =
-    useActions();
-  const { isAuth, user } = useAppSelector((state) => state.user);
+  const {
+    pauseTrack,
+    playTrack,
+    setCurrentTime,
+    setDuration,
+    setVolume,
+    addTrack,
+    removeTrack,
+    setActiveTrack,
+  } = useActions();
+  const { is, user } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (!audio) {
       audio = new Audio();
     } else {
+      audio.src = `http://localhost:4000/${active?.audio}`;
       audio.currentTime = currentTime;
-      audio.src = `http://localhost:4000/${active.audio}`;
       setAudio();
       if (user) {
         audio.play();
@@ -55,8 +65,6 @@ const Player = () => {
         setCurrentTime(Math.ceil(audio.currentTime));
         return currentTime;
       };
-      // playTrack();
-      // audio.play();
     }
   };
 
@@ -86,7 +94,7 @@ const Player = () => {
   };
 
   const addHandler = () => {
-    if (isAuth) {
+    if (is) {
       if (!add) {
         axios
           .patch('http://localhost:4000/users/addTrack/' + user._id, { trackId: active._id })
@@ -106,6 +114,24 @@ const Player = () => {
   if (!active) {
     return null;
   }
+
+  const clickNextTrackHandler = () => {
+    const indexActiveTrack = playList.indexOf(active);
+    if (indexActiveTrack !== playList.length - 1) {
+      setActiveTrack(playList[indexActiveTrack + 1]);
+    } else {
+      setActiveTrack(playList[0]);
+    }
+  };
+
+  const clickPreviousTrackHandler = () => {
+    const indexActiveTrack = playList.indexOf(active);
+    if (indexActiveTrack !== 0 && indexActiveTrack !== -1) {
+      setActiveTrack(playList[indexActiveTrack - 1]);
+    } else {
+      setActiveTrack(playList[playList.length - 1]);
+    }
+  };
 
   return (
     <div className={styles.block}>
@@ -141,6 +167,7 @@ const Player = () => {
         </div>
         <div className={styles.skips}>
           <svg
+            onClick={clickPreviousTrackHandler}
             className={styles.skip}
             width="24"
             height="24"
@@ -153,6 +180,7 @@ const Player = () => {
             />
           </svg>
           <svg
+            onClick={clickNextTrackHandler}
             className={styles.skip}
             width="24"
             height="24"

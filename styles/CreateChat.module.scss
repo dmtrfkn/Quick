@@ -1,0 +1,46 @@
+.block {
+  width: 500px;
+  max-height: 420px;
+  height: auto;
+  background-color: #202020;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 40px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 25px;
+  align-items: center;
+  color: #4e989d;
+  text-align: center;
+
+  h1 {
+    width: 45%;
+    border-bottom: 2px solid #40e5be;
+  }
+
+  .image {
+    border-radius: 12px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+  .add {
+    padding: 10px 20px;
+    margin: 0 auto;
+    color: #fff;
+    margin-top: 20px;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 19px;
+    border: 1px solid #40e5be;
+    width: 200px;
+    border-radius: 30px;
+    cursor: pointer;
+    margin-bottom: 20px;
+  }
+
+  .cursor {
+    cursor: pointer;
+  }
+}

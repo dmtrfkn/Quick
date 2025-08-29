@@ -1,5 +1,6 @@
-import { Album } from "./Album";
-import { Track } from "./Track";
+import { Album } from './Album';
+import { Chat } from './Chat';
+import { Track } from './Track';
 
 export type User = {
   _id: string;
@@ -8,4 +9,6 @@ export type User = {
   password: string;
   tracks: Track[];
   albums: Album[];
+  chats: Chat[];
+  pictureUrl: string;
 };

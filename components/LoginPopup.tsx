@@ -1,12 +1,12 @@
-import React, { FC, useState } from "react";
-import AuthForm from "./AuthForm";
-import LoginForm from "./LoginForm";
+import React, { FC, useState } from 'react';
+import LoginForm from './LoginForm';
 
 interface LoginPopupProps {
   SetOpen: () => void;
 }
 
-import styles from "../styles/LoginPopup.module.scss";
+import styles from '../styles/LoginPopup.module.scss';
+import AuthForm from './AuthForm';
 
 const LoginPopup: FC<LoginPopupProps> = ({ SetOpen }) => {
   const [active, setActive] = useState(0);
@@ -16,22 +16,16 @@ const LoginPopup: FC<LoginPopupProps> = ({ SetOpen }) => {
       <div className={styles.buttons}>
         <button
           onClick={() => setActive(0)}
-          className={`${styles.button} ${active === 0 ? styles.active : ""}`}
-        >
+          className={`${styles.button} ${active === 0 ? styles.active : ''}`}>
           Авторизация
         </button>
         <button
           onClick={() => setActive(1)}
-          className={`${styles.button} ${active ? styles.active : ""}`}
-        >
+          className={`${styles.button} ${active ? styles.active : ''}`}>
           Регистрация
         </button>
       </div>
-      {active === 1 ? (
-        <AuthForm setOpen={SetOpen} />
-      ) : (
-        <LoginForm setOpen={SetOpen} />
-      )}
+      {active === 1 ? <AuthForm setOpen={SetOpen} /> : <LoginForm setOpen={SetOpen} />}
     </div>
   );
 };

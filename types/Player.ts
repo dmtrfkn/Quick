@@ -7,10 +7,12 @@ export interface PlayerState {
   currentTime: number;
   pause: boolean;
   add: boolean;
+  playList: Track[];
 }
 
 export enum PlayerActionTypes {
   ADD = 'ADD',
+  PLAYLIST = 'PLAYLIST',
   REMOVE = 'REMOVE',
   PLAY = 'PLAY',
   PAUSE = 'PAUSE',
@@ -22,6 +24,11 @@ export enum PlayerActionTypes {
 
 export interface AddAction {
   type: PlayerActionTypes.ADD;
+}
+
+export interface PlayListAction {
+  type: PlayerActionTypes.PLAYLIST;
+  payload: Track[];
 }
 
 export interface RemoveAction {
@@ -54,6 +61,7 @@ export interface SetVolumeAction {
 }
 
 export type PlayerAction =
+  | PlayListAction
   | RemoveAction
   | AddAction
   | PlayAction

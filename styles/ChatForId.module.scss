@@ -1,0 +1,116 @@
+.image {
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+}
+
+.header {
+  padding: 10px 20px;
+  cursor: pointer;
+  width: 1440px;
+  height: 90px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  border: 1px solid #40e5be;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  background-color: #1a1a1a;
+  border-radius: 5px;
+
+  h1 {
+    border-bottom: 2px solid #40e5be;
+  }
+}
+
+.padding {
+  // margin-top: 140px;
+}
+
+.message {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+
+  &:hover {
+    background-color: #171717;
+  }
+}
+
+.track {
+  width: 680px;
+}
+
+.senderMessage {
+  // width: 800px;
+  flex-direction: row-reverse;
+  display: flex;
+  text-align: end;
+  gap: 50px;
+  align-items: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  margin-left: auto;
+}
+
+.avatar {
+  width: 70px;
+  height: 70px;
+}
+
+.page {
+  margin-bottom: 100px;
+}
+.flex {
+  display: flex;
+  gap: 5px;
+  position: relative;
+
+  .smiles {
+    position: absolute;
+    top: 6.5px;
+    left: 10px;
+    cursor: pointer;
+  }
+
+  .smiles:active {
+    svg path {
+      fill: #40e5be;
+    }
+  }
+
+  .send {
+    position: absolute;
+    right: 1px;
+    top: 3px;
+    cursor: pointer;
+  }
+}
+.smileBlock {
+  position: absolute;
+  width: 312px;
+  height: 600px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  background-color: #171717;
+  padding: 20px;
+  border-radius: 20px;
+  top: -620px;
+
+  .smile {
+    cursor: pointer;
+  }
+}
+
+.senderText {
+  font-size: 49px;
+  text-align: end;
+}
+
+.text {
+  font-size: 49px;
+  text-align: start;
+}
