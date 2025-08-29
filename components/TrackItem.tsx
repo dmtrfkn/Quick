@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { FC, useEffect, useState } from 'react';
+import { FC, useContext, useEffect, useState } from 'react';
 
 import styles from '../styles/Track.module.scss';
 import img from '../assets/audio-waves 1.png';
@@ -8,24 +8,33 @@ import { useActions } from '../store/hooks/useActions';
 import { useAppDispatch, useAppSelector } from '../store/hooks/redux';
 import axios from 'axios';
 import { change } from '../store/slices/UserSlice';
+import { socket, WebSocketContext } from '../contexts/WebSocketContext';
+import Modal from './Modal';
 
 interface TrackProps {
   track: Track;
-  // active?: boolean
+  type: 'album' | 'allTacks';
 }
 
-const TrackItem: FC<TrackProps> = ({ track }) => {
-  const { setActiveTrack, playTrack, pauseTrack, addTrack, removeTrack } = useActions();
+const TrackItem: FC<TrackProps> = ({ track, type }) => {
+  const { setActiveTrack, playTrack, pauseTrack, addTrack, removeTrack, playList } = useActions();
+  const { tracks: albumTracks } = useAppSelector((state) => state.albums);
+  const { tracks } = useAppSelector((state) => state.tracks);
   const { active, pause, add } = useAppSelector((state) => state.player);
-  const { isAuth, user } = useAppSelector((state) => state.user);
+  const { is, user } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
+  const [isOpen, setIsOpen] = useState(false);
+  const socket = useContext(WebSocketContext);
 
+  const onClickShare = () => {
+    setIsOpen((prev) => !prev);
+  };
   useEffect(() => {
     checkIsAdd();
   }, [user, add, active]);
 
   const addHandler = () => {
-    if (isAuth) {
+    if (is) {
       if (!add) {
         axios
           .patch('http://localhost:4000/users/addTrack/' + user._id, { trackId: active._id })
@@ -43,6 +52,11 @@ const TrackItem: FC<TrackProps> = ({ track }) => {
   };
 
   const play = () => {
+    if (type === 'album') {
+      playList(albumTracks);
+    } else {
+      playList(tracks);
+    }
     if (active) {
       if (track._id !== active._id) {
         setActiveTrack(track);
@@ -64,6 +78,17 @@ const TrackItem: FC<TrackProps> = ({ track }) => {
     } else {
       removeTrack();
     }
+  };
+
+  const onClickSendTrack = (id: string) => {
+    socket.emit('newMessage', {
+      message: '',
+      sender: user._id,
+      senderUrl: user.pictureUrl,
+      track: track,
+      chatId: id,
+    });
+    setIsOpen(false);
   };
 
   return (
@@ -107,8 +132,9 @@ const TrackItem: FC<TrackProps> = ({ track }) => {
         )}
       </div>
       <div className={styles.name}>
-        <p className={styles.text}>{track.artist}</p>
-        <p className={styles.text}>{track.name}</p>
+        <p className={styles.text}>
+          {track.artist} - {track.name}
+        </p>
       </div>
       <div className={styles.hovers}>
         <div onClick={addHandler} className={styles.hover}>
@@ -144,6 +170,7 @@ const TrackItem: FC<TrackProps> = ({ track }) => {
         </div>
         <div className={styles.hover}>
           <svg
+            onClick={onClickShare}
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -155,6 +182,28 @@ const TrackItem: FC<TrackProps> = ({ track }) => {
             />
           </svg>
         </div>
+        <Modal isOpen={isOpen} setOpen={onClickShare}>
+          <div className={styles.sendBlock}>
+            {user?.chats.map((i, index) => (
+              <>
+                <h1 className={styles.h1}>Выберите чат</h1>
+                <div className={styles.send} key={index} onClick={() => onClickSendTrack(i._id)}>
+                  <div className={styles.flex}>
+                    <Image
+                      src={`http://localhost:4000/${i.picture}`}
+                      width={50}
+                      height={50}
+                      alt="asd"
+                      className={styles.image}
+                    />{' '}
+                    {i.roomName}
+                  </div>
+                  {/* <button>Отправить</button> */}
+                </div>
+              </>
+            ))}
+          </div>
+        </Modal>
       </div>
     </div>
   );

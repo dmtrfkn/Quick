@@ -8,10 +8,13 @@ const InitialState: PlayerState = {
   active: null,
   pause: true,
   add: false,
+  playList: [],
 };
 
 export const playerReducer = (state = InitialState, action: PlayerAction): PlayerState => {
   switch (action.type) {
+    case PlayerActionTypes.PLAYLIST:
+      return { ...state, playList: action.payload };
     case PlayerActionTypes.ADD:
       return { ...state, add: true };
     case PlayerActionTypes.REMOVE:

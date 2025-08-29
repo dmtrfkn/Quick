@@ -1,6 +1,10 @@
 import { PlayerAction, PlayerActionTypes } from '../../types/Player';
 import { Track } from '../../types/Track';
 
+export const playList = (payload: Track[]): PlayerAction => {
+  return { type: PlayerActionTypes.PLAYLIST, payload };
+};
+
 export const addTrack = (): PlayerAction => {
   return { type: PlayerActionTypes.ADD };
 };

@@ -3,7 +3,7 @@ import axios from 'axios';
 import Link from 'next/link';
 import Layout from '../../components/Layout';
 
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import TrackList from '../../components/TrackList';
 
 import styles from '../../styles/TrackPage.module.scss';
@@ -11,6 +11,9 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks/redux';
 import { FetchTracks, SearchTracks, setTracks } from '../../store/slices/TrackSlice';
 import TextField from '../../components/TextField';
 import Head from 'next/head';
+import Album from '../../components/Album';
+import AlbumList from '../../components/AlbumList';
+import { WebSocketContext } from '../../contexts/WebSocketContext';
 
 const index = () => {
   const dispatch = useAppDispatch();
@@ -37,14 +40,13 @@ const index = () => {
         <div className="container">
           <div className={styles.flex}>
             <div className={styles.header}>
-              <h1>Список треков</h1>
-              <Link href="/tracks/create">
-                <a href="">Загрузить</a>
-              </Link>
+              <h1 className={styles.h2}>Список треков</h1>
             </div>
+
             <TextField placeholder="Поиск... " value={query} onChange={search} />
           </div>
-          <TrackList tracks={tracks} />
+          <AlbumList />
+          <TrackList type="allTacks" tracks={tracks} />
         </div>
       </div>
     </>

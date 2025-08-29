@@ -1,15 +1,17 @@
-import React, { FC } from "react";
-import { UseFormRegisterReturn } from "react-hook-form";
+import React, { FC } from 'react';
+import { UseFormRegisterReturn } from 'react-hook-form';
 
-import styles from "../styles/TextField.module.scss";
+import styles from '../styles/TextField.module.scss';
 
 interface TextFiledProps {
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
-  register?: UseFormRegisterReturn<"email" | "name" | "nick">;
-  type?: "text" | "email" | 'range';
+  register?: UseFormRegisterReturn<'email' | 'name' | 'nick'>;
+  type?: 'text' | 'email' | 'range' | 'smile';
   errorMessage?: string;
+  message?: string;
+  width?: number;
 }
 
 const TextField: FC<TextFiledProps> = ({
@@ -19,6 +21,8 @@ const TextField: FC<TextFiledProps> = ({
   onChange,
   register,
   type,
+  message,
+  width,
 }) => {
   return (
     <>
@@ -33,7 +37,7 @@ const TextField: FC<TextFiledProps> = ({
         />
       ) : (
         <>
-          {errorMessage && <div className={styles.error}>{errorMessage}</div>}
+          {message && <div className={styles.error}>{message}</div>}
           <input
             value={value}
             placeholder={placeholder}

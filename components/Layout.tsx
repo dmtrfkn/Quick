@@ -3,12 +3,13 @@ import Footer from './Footer';
 import Header from './Header';
 
 import styles from '../styles/Layout.module.scss';
+
 import Player from './Player';
 import Head from 'next/head';
 import Links from './Link';
 import { useActions } from '../store/hooks/useActions';
 import { PlayerState } from '../types/Player';
-import { useAppDispatch } from '../store/hooks/redux';
+import { useAppDispatch, useAppSelector } from '../store/hooks/redux';
 import axios from 'axios';
 import { login } from '../store/slices/UserSlice';
 
@@ -19,6 +20,7 @@ interface LayoutProps {
 
 const Layout: FC<LayoutProps> = ({ children, title }) => {
   const dispatch = useAppDispatch();
+  const { user } = useAppSelector((state) => state.user);
 
   useEffect(() => {
     axios

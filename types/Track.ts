@@ -1,13 +1,9 @@
-import { Comment } from "./Comment";
-
-export type Track = {
+export interface Track {
   _id: string;
   name: string;
   artist: string;
-  text: string;
   category: string;
   listens: number;
   picture: string;
   audio: string;
-  comments: Comment[];
-};
+}

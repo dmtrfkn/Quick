@@ -1,0 +1,15 @@
+.image {
+  border-radius: 12px;
+}
+
+.block {
+  width: 200px;
+  height: auto;
+  color: #606060;
+  cursor: pointer;
+  margin-bottom: 50px;
+
+  .name {
+    text-align: center;
+  }
+}

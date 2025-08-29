@@ -1,0 +1,17 @@
+.smileBlock {
+  position: absolute;
+  width: 336px;
+  height: 234px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  background-color: #171717;
+  padding: 20px;
+  border-radius: 20px;
+  top: -250px;
+
+  .smile {
+    width: 24px;
+    height: 24px;
+  }
+}
